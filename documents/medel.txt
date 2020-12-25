@@ -1,0 +1,26 @@
+Prodcut
+    name    
+    image
+    description
+    relation
+        reviewId
+
+Category
+    name
+
+Order
+    status
+    qyt
+    relation
+        userId  
+        prodcutId
+
+Review
+    title
+    content
+    relation
+        userId
+        prodcutId
+
+User
+
