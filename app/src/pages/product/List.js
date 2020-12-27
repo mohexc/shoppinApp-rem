@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from "axios";
-import authClient from '../../utils/authClient';
+import ProdcutCard from './components/ProductCard';
+import { Row, Typography, Col } from 'antd'
 
 const List = () => {
     const [products, setProducts] = useState([])
@@ -10,16 +11,18 @@ const List = () => {
     }, [])
 
     const fetchProdcuts = async () => {
-        // const prodcuts = await authClient.client.get('/api/products')
         const { data } = await axios.get(`/api/products`)
-
-        console.log(data)
-        debugger
         setProducts(data)
     }
     return (
         <div className="product-list">
-            List Prodcut
+            <Typography.Title level={4}>List Prodcut</Typography.Title>
+            <Row gutter={[16, 16]}>
+                {products.map(product => (
+                    <Col xs={4}>
+                        <ProdcutCard product={product} />
+                    </Col>))}
+            </Row>
         </div>
     )
 }
