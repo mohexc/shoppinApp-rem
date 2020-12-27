@@ -1,23 +1,20 @@
 import React from 'react'
 import { Layout } from 'antd';
-import AppSidebar from './AppSidebar';
 import AppHeader from './AppHeader';
 import AppContents from './AppContents';
 import AppFooter from './AppFooter';
 
-const { Header, Footer, Sider, Content } = Layout;
+import ListProdcut from '../pages/product/List'
+
 // main
 const AppLayout = () => {
     return (
-        <Layout>
-            <AppSidebar />
-            <Layout style={{ height: '100vh' }} >
-                <AppHeader />
-                <AppContents>
-                    <span> hi </span>
-                </AppContents>
-                <AppFooter />
-            </Layout>
+        <Layout style={{ height: '100vh' }} >
+            <AppHeader />
+            <AppContents>
+                <ListProdcut />
+            </AppContents>
+            <AppFooter />
         </Layout>
     )
 }
