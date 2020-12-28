@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
+import { useAuthContext } from "./AuthContext";
 
 const Context = React.createContext();
 // main component
 const CartContext = ({ children }) => {
-
+    const { user } = useAuthContext()
     const [cart, setCart] = useState([])
     const [itemsTotal, setItemsTotal] = useState(0)
 
@@ -11,6 +12,10 @@ const CartContext = ({ children }) => {
         const total = cart.reduce((total, item) => total + item.itemTotal, 0)
         setItemsTotal(total)
     }, [cart])
+
+    useEffect(() => {
+        setCart([])
+    }, [user])
 
     const addItem = (product) => {
         const sameItem = cart.find(item => item.product._id === product._id)

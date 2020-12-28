@@ -4,10 +4,8 @@ import { Layout, Card } from 'antd';
 // main
 const AppContents = ({ children }) => {
     return (
-        <Layout.Content style={{ padding: "1rem", marginTop: 64, minHeight: '100%' }}>
-            {/* <Card style={{ minHeight: '79vh' }}> */}
+        <Layout.Content style={{ padding: "1rem", marginTop: 64 }}>
             {children}
-            {/* </Card> */}
         </Layout.Content>
     )
 }

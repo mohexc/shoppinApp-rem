@@ -25,15 +25,16 @@ const tailLayout = {
 const SignIn = () => {
     const { primary } = useThemColorContex()
     const history = useHistory()
-    const { user, login, } = useAuthContext()
+    const { login, } = useAuthContext()
 
     const onFinish = async (values) => {
-        const result = login(values)
-
-        if (result) {
-
+        const result = await login(values)
+        if (result.complete) {
+            history.push('/')
+            message.success(result.message)
+            return
         }
-        debugger
+        message.error(result.message)
     }
     const onFinishFailed = (values) => {
 
