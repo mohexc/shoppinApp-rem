@@ -5,7 +5,7 @@ import AppContents from './AppContents';
 import AppFooter from './AppFooter';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import ProductList from '../pages/product/List'
-import OrderList from '../pages/order/List'
+import CartList from '../pages/cart/List'
 import ProductShow from '../pages/product/Show'
 
 
@@ -13,7 +13,7 @@ import ProductShow from '../pages/product/Show'
 const AppLayout = () => {
     return (
         <Router>
-            <Layout style={{ height: '100vh' }} >
+            <Layout style={{ minHeight: '100vh' }} >
                 <AppHeader />
                 <AppContents>
                     <Switch>
@@ -24,7 +24,7 @@ const AppLayout = () => {
             <Users />
           </Route> */}
 
-                        <Route exact path="/orders"><OrderList /></Route>
+                        <Route exact path="/cart"><CartList /></Route>
                         <Route exact path="/product/:id"><ProductShow /></Route>
                         <Route exact path="/"><ProductList /></Route>
                     </Switch>

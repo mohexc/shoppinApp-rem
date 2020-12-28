@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react'
 import { useParams, useHistory } from "react-router-dom";
 import { Row, Col, Divider, Rate, Button } from 'antd';
 import axios from "axios";
-import { useOrderContext } from '../../context/OrderContext';
+import { useCartContext } from '../../context/CartContex';
 
 // main
 const Show = () => {
     const history = useHistory();
     const params = useParams();
     const [product, setProduct] = useState()
-    const { addOrder } = useOrderContext()
+    const { addItem } = useCartContext()
 
     useEffect(() => {
         fetchProdcut()
@@ -52,7 +52,7 @@ const Show = () => {
                         </Row>
                         <Divider />
                         <Row style={{ paddingLeft: '1rem', paddingRight: "1rem", paddingBottom: "1rem" }}>
-                            <Button disabled={product.countInStock < 1 ? true : false} block type='primary' onClick={() => addOrder(product)}>
+                            <Button disabled={product.countInStock < 1 ? true : false} block type='primary' onClick={() => addItem(product)}>
                                 ADD TO CART
                             </Button>
                         </Row >

@@ -2,13 +2,13 @@ import React from 'react'
 import { Layout, Row, Col, Button, Popover, Divider } from 'antd';
 import { ShoppingCartOutlined, UserOutlined } from '@ant-design/icons';
 import { useThemColorContex } from '../context/ThemColorContex';
-import { useOrderContext } from '../context/OrderContext';
 import { SettingOutlined, SolutionOutlined, LoginOutlined, LogoutOutlined, HeartOutlined, ShoppingOutlined, InboxOutlined } from '@ant-design/icons';
 import { useHistory } from "react-router-dom"
+import { useCartContext } from '../context/CartContex';
 // main
 const AppHeader = () => {
 	const { primary } = useThemColorContex()
-	const { ordersTotal } = useOrderContext()
+	const { itemsTotal } = useCartContext()
 	const history = useHistory()
 	const popoverLogin = () => {
 
@@ -39,9 +39,9 @@ const AppHeader = () => {
 					Bag
 				</Row>
 				<Divider />
-				<Row align="middle" style={{ color: primary, cursor: "pointer" }} onClick={() => history.push(`/orders`)}>
+				<Row align="middle" style={{ color: primary, cursor: "pointer" }} onClick={() => history.push(`/cart`)}>
 					<InboxOutlined style={{ fontSize: "1.2rem", marginRight: "1rem", }} />
-					<span style={{ marginRight: "1rem", }} >{ordersTotal}</span >
+					<span style={{ marginRight: "1rem", }} >{itemsTotal}</span >
 					Order
 				</Row>
 			</div>
@@ -60,7 +60,7 @@ const AppHeader = () => {
 								<Popover content={popoverChart()} trigger="click" >
 									<Button style={{ marginRight: "1rem" }}>
 										<ShoppingCartOutlined style={{ fontSize: '1.2rem', color: primary, marginRight: "0.5rem" }} />
-										<span style={{ marginRight: "0.5rem", marginLeft: "0.5rem" }}>{ordersTotal}</span>
+										<span style={{ marginRight: "0.5rem", marginLeft: "0.5rem" }}>{itemsTotal}</span>
 										<span >CART</span>
 									</Button>
 								</Popover>
