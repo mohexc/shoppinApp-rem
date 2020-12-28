@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useParams, useHistory } from "react-router-dom";
-import { Row, Col, Divider, Rate, List, Button } from 'antd';
+import { Row, Col, Divider, Rate, Button } from 'antd';
 import axios from "axios";
 import { useOrderContext } from '../../context/OrderContext';
 
@@ -18,14 +18,13 @@ const Show = () => {
 
     const fetchProdcut = async () => {
         const { data } = await axios.get(`/api/products/${params.id}`)
-
         setProduct(data)
     }
     if (!product) return null
     return (
         <div className="product-show">
             <Row align='middle'  >
-                <h1 onClick={() => history.goBack()} style={{ marginLeft: "1rem", marginTop: '0.5rem' }}>GO BACK</h1>
+                <h1 onClick={() => history.goBack()} style={{ marginLeft: "1rem", marginTop: '0.5rem', cursor: "pointer" }}>GO BACK</h1>
             </Row>
             <Row gutter={[32, 32]} justify="center">
                 <Col xs={10} >
@@ -53,13 +52,11 @@ const Show = () => {
                         </Row>
                         <Divider />
                         <Row style={{ paddingLeft: '1rem', paddingRight: "1rem", paddingBottom: "1rem" }}>
-                            <Button block type='primary' onClick={() => addOrder(product)}>
+                            <Button disabled={product.countInStock < 1 ? true : false} block type='primary' onClick={() => addOrder(product)}>
                                 ADD TO CART
                             </Button>
                         </Row >
                     </div>
-
-
                 </Col>
             </Row>
         </div >

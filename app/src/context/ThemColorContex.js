@@ -1,9 +1,10 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 
 const Context = React.createContext();
 
 // main component
 const ThemColorContex = ({ children }) => {
+    // eslint-disable-next-line 
     const [primary, setPrimary] = useState('#08c')
 
     return (
