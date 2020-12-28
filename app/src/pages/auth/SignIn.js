@@ -1,9 +1,11 @@
 import React from 'react'
-import { Row, Col, Form, Input, Typography, Button, Checkbox, Card } from "antd"
+import { Row, Col, Form, Input, Typography, Button, Checkbox, Card, message } from "antd"
 import { LoginOutlined } from '@ant-design/icons';
 import { useThemColorContex } from '../../context/ThemColorContex';
 import { useHistory } from "react-router-dom"
 import image from "../../images/playstation.jpg"
+
+import { useAuthContext } from '../../context/AuthContext';
 const layout = {
     labelCol: {
         span: 4,
@@ -23,8 +25,15 @@ const tailLayout = {
 const SignIn = () => {
     const { primary } = useThemColorContex()
     const history = useHistory()
-    const onFinish = (values) => {
+    const { user, login, } = useAuthContext()
 
+    const onFinish = async (values) => {
+        const result = login(values)
+
+        if (result) {
+
+        }
+        debugger
     }
     const onFinishFailed = (values) => {
 
@@ -44,6 +53,7 @@ const SignIn = () => {
                     <LoginOutlined style={{ fontSize: "2rem", marginRight: "1rem", color: primary }} />
                 </Typography.Title>
                 <Form
+                    labelAlign="left"
                     colon={false}
                     onFinish={onFinish}
                     onFinishFailed={onFinishFailed}
@@ -51,13 +61,26 @@ const SignIn = () => {
                     name="signin"
                     initialValues={{ remember: true, }}
                 >
-                    <Form.Item name="name" label="Username" >
+                    <Form.Item
+                        name="email"
+                        label="Email"
+                        rules={[
+                            { type: 'email', message: 'The input is not valid E-mail!' },
+                            { required: true, message: 'Please input your username!' },
+                        ]} >
                         <Input />
                     </Form.Item>
-                    <Form.Item name="passowrd" label="Password" >
+                    <Form.Item
+                        name="password"
+                        label="Password"
+                        rules={[{ required: true, message: 'Please input your password!', },]}
+                    >
                         <Input.Password />
                     </Form.Item>
-                    <Form.Item {...tailLayout} name="remember" valuePropName="checked">
+                    <Form.Item
+                        {...tailLayout}
+                        name="remember"
+                        valuePropName="checked">
                         <Checkbox>Remember me</Checkbox>
                     </Form.Item>
                     <Form.Item {...tailLayout}>

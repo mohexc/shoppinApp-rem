@@ -18,7 +18,7 @@ const AppHeader = () => {
 	const popoverLogin = () => {
 		return (
 			<div style={{ width: "250px", borderRadius: "20px important!" }}>
-				<Row align="middle" style={{ color: primary }} onClick={() => history.push(`signin`)}>
+				<Row align="middle" style={{ color: primary }} onClick={() => history.push(`/signin`)}>
 					<LoginOutlined style={{ fontSize: "1.2rem", marginRight: "1rem", }} />
 					SING IN
 				</Row>
@@ -28,12 +28,12 @@ const AppHeader = () => {
 					Logout
 				</Row>
 				<Divider />
-				<Row align="middle" style={{ color: primary }} onClick={() => history.push(`signup`)}>
+				<Row align="middle" style={{ color: primary }} onClick={() => history.push(`/signup`)}>
 					<SolutionOutlined style={{ fontSize: "1.2rem", marginRight: "1rem", }} />
 					SING UP
 				</Row>
 				<Divider />
-				<Row align="middle" style={{ color: primary }} onClick={() => history.push(`profile`)}>
+				<Row align="middle" style={{ color: primary }} onClick={() => history.push(`/profile`)}>
 					<SettingOutlined style={{ fontSize: "1.2rem", marginRight: "1rem", }} />
 					Account
 				</Row>
