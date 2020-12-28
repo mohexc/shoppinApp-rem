@@ -15,7 +15,7 @@ const List = () => {
         setProducts(data)
     }
     return (
-        <div className="product-list">
+        <div className="product-list" style={{ height: "79vh", backgroundColor: "white", padding: "1rem" }}>
             <Typography.Title level={4}>List Prodcut</Typography.Title>
             <Row gutter={[16, 16]}>
                 {products.map(product => (

@@ -22,7 +22,7 @@ const Show = () => {
     }
     if (!product) return null
     return (
-        <div className="product-show">
+        <div className="product-show" style={{ height: "79vh", backgroundColor: "white", padding: "1rem" }}>
             <Row align='middle'  >
                 <h1 onClick={() => history.goBack()} style={{ marginLeft: "1rem", marginTop: '0.5rem', cursor: "pointer" }}>GO BACK</h1>
             </Row>

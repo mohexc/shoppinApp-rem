@@ -15,10 +15,11 @@ const CartContext = ({ children }) => {
     const addItem = (product) => {
         const sameItem = cart.find(item => item.product._id === product._id)
         if (sameItem) {
+            const index = cart.indexOf(element => sameItem._id === element.prodcut._id)
             sameItem.itemTotal = sameItem.itemTotal + 1
-            const filterItem = cart.filter(item => item.product._id !== product._id)
-            const updateCart = [...filterItem, sameItem]
-            setCart([...updateCart])
+            const [..._cart] = cart
+            _cart[index] = sameItem
+            setCart(_cart)
             return
         }
         const newItem = {
@@ -36,10 +37,12 @@ const CartContext = ({ children }) => {
             return setCart([...filterItem])
         }
 
+        const index = cart.indexOf(element => sameItem._id === element.prodcut._id)
         sameItem.itemTotal = sameItem.itemTotal - 1
-        const filterItem = cart.filter(item => item.product._id !== item._id)
-        const updateCart = [...filterItem, sameItem]
-        setCart([...updateCart])
+        const [..._cart] = cart
+        _cart[index] = sameItem
+        setCart(_cart)
+        return
     }
 
     const deleteItem = (product) => {

@@ -10,17 +10,33 @@ const AppHeader = () => {
 	const { primary } = useThemColorContex()
 	const { itemsTotal } = useCartContext()
 	const history = useHistory()
-	const popoverLogin = () => {
 
+	const logout = () => {
+
+	}
+
+	const popoverLogin = () => {
 		return (
 			<div style={{ width: "250px", borderRadius: "20px important!" }}>
-				<Row align="middle" style={{ color: primary }}><LoginOutlined style={{ fontSize: "1.2rem", marginRight: "1rem", }} />SING IN</Row>
+				<Row align="middle" style={{ color: primary }} onClick={() => history.push(`signin`)}>
+					<LoginOutlined style={{ fontSize: "1.2rem", marginRight: "1rem", }} />
+					SING IN
+				</Row>
 				<Divider />
-				<Row align="middle" style={{ color: primary }}><LogoutOutlined style={{ fontSize: "1.2rem", marginRight: "1rem", }} />Logout</Row>
+				<Row align="middle" style={{ color: primary }} onClick={logout}>
+					<LogoutOutlined style={{ fontSize: "1.2rem", marginRight: "1rem", }} />
+					Logout
+				</Row>
 				<Divider />
-				<Row align="middle" style={{ color: primary }}><SolutionOutlined style={{ fontSize: "1.2rem", marginRight: "1rem", }} />SING UP</Row>
+				<Row align="middle" style={{ color: primary }} onClick={() => history.push(`signup`)}>
+					<SolutionOutlined style={{ fontSize: "1.2rem", marginRight: "1rem", }} />
+					SING UP
+				</Row>
 				<Divider />
-				<Row align="middle" style={{ color: primary }}><SettingOutlined style={{ fontSize: "1.2rem", marginRight: "1rem", }} />Account</Row>
+				<Row align="middle" style={{ color: primary }} onClick={() => history.push(`profile`)}>
+					<SettingOutlined style={{ fontSize: "1.2rem", marginRight: "1rem", }} />
+					Account
+				</Row>
 			</div>
 		)
 	}
@@ -47,6 +63,8 @@ const AppHeader = () => {
 			</div>
 		)
 	}
+
+	// main
 	return (
 		<Layout.Header style={{ position: 'fixed', zIndex: 1, width: '100%', backgroundColor: "white", padding: "0 1rem" }}>
 			<Row justify="center">
