@@ -3,19 +3,33 @@ import { Layout } from 'antd';
 import AppHeader from './AppHeader';
 import AppContents from './AppContents';
 import AppFooter from './AppFooter';
-
-import ListProdcut from '../pages/product/List'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import ProductList from '../pages/product/List'
+import ProductShow from '../pages/product/Show'
+import Edit from '../pages/product/Edit';
 
 // main
 const AppLayout = () => {
     return (
-        <Layout style={{ height: '100vh' }} >
-            <AppHeader />
-            <AppContents>
-                <ListProdcut />
-            </AppContents>
-            <AppFooter />
-        </Layout>
+        <Router>
+            <Layout style={{ height: '100vh' }} >
+                <AppHeader />
+                <AppContents>
+                    <Switch>
+                        {/* <Route path="/about">
+            <About />
+          </Route>
+          <Route path="/users">
+            <Users />
+          </Route> */}
+
+                        <Route exact path="/product/:id"><ProductShow /></Route>
+                        <Route exact path="/"><ProductList /></Route>
+                    </Switch>
+                </AppContents>
+                <AppFooter />
+            </Layout>
+        </Router>
     )
 }
 

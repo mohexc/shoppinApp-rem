@@ -19,7 +19,7 @@ const List = () => {
             <Typography.Title level={4}>List Prodcut</Typography.Title>
             <Row gutter={[16, 16]}>
                 {products.map(product => (
-                    <Col xs={4}>
+                    <Col key={product._id} xs={4}>
                         <ProdcutCard product={product} />
                     </Col>))}
             </Row>
