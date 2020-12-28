@@ -85,7 +85,7 @@ const AuthContext = ({ children }) => {
     }
     const register = async (values) => {
         try {
-            const { data } = await axios.post('/api/users', values, configValue('config'))
+            const { data } = await axios.post('/api/users/register', values, configValue('config'))
             localStorage.setItem('user', JSON.stringify(data))
             setUser(data)
             return {

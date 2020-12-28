@@ -4,7 +4,6 @@ import { LoginOutlined } from '@ant-design/icons';
 import { useThemColorContex } from '../../context/ThemColorContex';
 import { useHistory } from "react-router-dom"
 import image from "../../images/playstation.jpg"
-
 import { useAuthContext } from '../../context/AuthContext';
 const layout = {
     labelCol: {
