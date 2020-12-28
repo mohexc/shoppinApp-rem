@@ -5,8 +5,9 @@ import AppContents from './AppContents';
 import AppFooter from './AppFooter';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import ProductList from '../pages/product/List'
+import OrderList from '../pages/order/List'
 import ProductShow from '../pages/product/Show'
-import Edit from '../pages/product/Edit';
+
 
 // main
 const AppLayout = () => {
@@ -23,6 +24,7 @@ const AppLayout = () => {
             <Users />
           </Route> */}
 
+                        <Route exact path="/orders"><OrderList /></Route>
                         <Route exact path="/product/:id"><ProductShow /></Route>
                         <Route exact path="/"><ProductList /></Route>
                     </Switch>

@@ -8,7 +8,7 @@ import { useHistory } from "react-router-dom"
 // main
 const AppHeader = () => {
 	const { primary } = useThemColorContex()
-	const { orders } = useOrderContext()
+	const { ordersTotal } = useOrderContext()
 	const history = useHistory()
 	const popoverLogin = () => {
 
@@ -39,9 +39,9 @@ const AppHeader = () => {
 					Bag
 				</Row>
 				<Divider />
-				<Row align="middle" style={{ color: primary, cursor: "pointer" }} onClick={() => history.push(`/orderlist`)}>
+				<Row align="middle" style={{ color: primary, cursor: "pointer" }} onClick={() => history.push(`/orders`)}>
 					<InboxOutlined style={{ fontSize: "1.2rem", marginRight: "1rem", }} />
-					<span style={{ marginRight: "1rem", }} >{orders.length}</span >
+					<span style={{ marginRight: "1rem", }} >{ordersTotal}</span >
 					Order
 				</Row>
 			</div>
@@ -53,14 +53,14 @@ const AppHeader = () => {
 				<Col xs={20}>
 					<Row>
 						<Col xs={12}>
-							<h1 style={{ color: primary }}>PROSHOP</h1>
+							<h1 style={{ color: primary, cursor: "pointer" }} onClick={() => history.push(`/`)}>PROSHOP</h1>
 						</Col>
 						<Col xs={12}>
 							<Row justify="end" align="middle" style={{ paddingTop: "1.1rem" }}>
 								<Popover content={popoverChart()} trigger="click" >
 									<Button style={{ marginRight: "1rem" }}>
 										<ShoppingCartOutlined style={{ fontSize: '1.2rem', color: primary, marginRight: "0.5rem" }} />
-										<span style={{ marginRight: "0.5rem", marginLeft: "0.5rem" }}>{orders.length}</span>
+										<span style={{ marginRight: "0.5rem", marginLeft: "0.5rem" }}>{ordersTotal}</span>
 										<span >CART</span>
 									</Button>
 								</Popover>
