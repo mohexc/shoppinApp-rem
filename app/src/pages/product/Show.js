@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { useParams, useHistory } from "react-router-dom";
-import { ArrowLeftOutlined } from '@ant-design/icons';
 import { Row, Col, Divider, Rate, List, Button } from 'antd';
 import axios from "axios";
+import { useOrderContext } from '../../context/OrderContext';
 
 // main
 const Show = () => {
     const history = useHistory();
     const params = useParams();
     const [product, setProduct] = useState()
+    const { addOrder } = useOrderContext()
 
     useEffect(() => {
         fetchProdcut()
@@ -52,10 +53,9 @@ const Show = () => {
                         </Row>
                         <Divider />
                         <Row style={{ paddingLeft: '1rem', paddingRight: "1rem", paddingBottom: "1rem" }}>
-                            <Button block type='primary'>
+                            <Button block type='primary' onClick={() => addOrder(product)}>
                                 ADD TO CART
-                        </Button>
-
+                            </Button>
                         </Row >
                     </div>
 
