@@ -1,5 +1,5 @@
 import React from 'react'
-import { Row, Col, Form, Input, Typography, Button, Checkbox, Card } from "antd"
+import { Row, Col, Form, Input, Typography, Button, } from "antd"
 import { SolutionOutlined } from '@ant-design/icons';
 import { useThemColorContex } from '../../context/ThemColorContex';
 import { useHistory } from "react-router-dom"
@@ -21,6 +21,7 @@ const tailLayout = {
 
 const ForgetPasswored = () => {
     const { primary } = useThemColorContex()
+    // eslint-disable-next-line
     const history = useHistory()
 
     const onFinish = (values) => {

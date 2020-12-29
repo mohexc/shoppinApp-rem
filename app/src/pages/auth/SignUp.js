@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { Row, Col, Form, Input, Typography, Button, Checkbox, Card, message } from "antd"
+import React, { useState, useEffect } from 'react'
+import { Row, Col, Form, Input, Typography, Button, Checkbox, message } from "antd"
 import { SolutionOutlined } from '@ant-design/icons';
 import { useThemColorContex } from '../../context/ThemColorContex';
 import { useHistory } from "react-router-dom"
@@ -24,9 +24,11 @@ const SignUp = () => {
     const [submitBtn, setSubmitBtn] = useState(false)
     const { primary } = useThemColorContex()
     const history = useHistory()
-    const { register } = useAuthContext()
+    const { register, user } = useAuthContext()
 
-
+    useEffect(() => {
+        if (user) return history.push('/')
+    }, [user])
     const onFinish = async (values) => {
         setSubmitBtn(true)
         const result = await register(values)

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Row, Card } from 'antd'
+import { Card } from 'antd'
 
 const PaymentMethod = () => {
     return (

@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Layout, Row, Col, Button, Popover, Divider } from 'antd';
-import { ShoppingCartOutlined, UserOutlined } from '@ant-design/icons';
+import { ShoppingCartOutlined } from '@ant-design/icons';
 import { useThemColorContex } from '../context/ThemColorContex';
-import { SettingOutlined, SolutionOutlined, LoginOutlined, LogoutOutlined, HeartOutlined, ShoppingOutlined, InboxOutlined } from '@ant-design/icons';
+import { SettingOutlined, SolutionOutlined, LoginOutlined, LogoutOutlined, ShoppingOutlined } from '@ant-design/icons';
 import { useHistory } from "react-router-dom"
 import { useCartContext } from '../context/CartContex';
 import { useAuthContext } from '../context/AuthContext';
@@ -32,32 +32,12 @@ const AppHeader = () => {
 					<LogoutOutlined style={{ fontSize: "1.2rem", marginRight: "1rem", }} />
 					Logout
 				</Row>
-
-
 			</div>
 		)
 	}
 
-	const popoverChart = () => {
-
-		return (
-			<div style={{ width: "250px", borderRadius: "20px important!" }}>
-				<Row align="middle" style={{ color: primary }}>
-					<HeartOutlined style={{ fontSize: "1.2rem", marginRight: "1rem", }} />
-					Favorites
-				</Row>
-				<Divider />
-				<Row align="middle" style={{ color: primary }}>
-					<ShoppingOutlined style={{ fontSize: "1.2rem", marginRight: "1rem", }} />
-					Bag
-				</Row>
-
-			</div>
-		)
-	}
 	const goTo = () => {
 		if (itemsTotal) return history.push('/cart')
-
 		return history.push('/')
 	}
 
@@ -68,7 +48,7 @@ const AppHeader = () => {
 				<Col xs={22}>
 					<Row>
 						<Col xs={12}>
-							<h1 style={{ color: primary, cursor: "pointer" }} onClick={() => history.push(`/`)}>PROSHOP</h1>
+							<h1 style={{ color: primary, cursor: "pointer", fontWeight: "bolder", fontSize: "1.5rem" }} onClick={() => history.push(`/`)}>X SHOP</h1>
 						</Col>
 						<Col xs={12}>
 							<Row justify={_.get(user, 'isAdmin', false) ? 'center' : 'end'} align="middle" style={{ width: '100%' }}>
@@ -80,7 +60,7 @@ const AppHeader = () => {
 
 								{(user && user.name)
 									? <div>
-										<Popover content={popoverAccount()} trigger="click" >
+										<Popover placement="bottom" content={popoverAccount()} trigger="click" >
 											<Button>Account: {user.name}</Button>
 										</Popover>
 									</div>

@@ -1,17 +1,10 @@
 import React, { useState, useContext, useEffect } from "react";
 import axios from 'axios'
-import _ from "lodash"
+
 const Context = React.createContext();
 // main component
 const AuthContext = ({ children }) => {
     const [user, setUser] = useState()
-
-    useEffect(() => {
-        if (user) {
-            console.log(user)
-            debugger
-        }
-    }, [user])
 
     useEffect(() => {
         const getUser = localStorage.getItem('user')
@@ -127,13 +120,14 @@ const AuthContext = ({ children }) => {
         }
     }
 
-    const updateUserProfile = async () => {
+    const updateUserProfile = async (values) => {
         try {
-            const { data } = await axios.put(`/api/users/profile`, user, configValue('authConfig'))
+            const { data } = await axios.put(`/api/users/profile`, values, configValue('authConfig'))
             setUser(data)
+            localStorage.setItem('user', JSON.stringify(data))
             return {
                 complete: true,
-                message: 'Get User Details Sucsses',
+                message: 'Update Sucsses',
                 data
             }
         }
@@ -154,6 +148,10 @@ const AuthContext = ({ children }) => {
     const listUsers = async () => {
         try {
             const { data } = await axios.get(`/api/users`, configValue('authConfigNoContentType'))
+            return {
+                data,
+                complete: true
+            }
         }
         catch (error) {
             const message = error.response && error.response.data.message
@@ -172,6 +170,10 @@ const AuthContext = ({ children }) => {
     const deleteUser = async (id) => {
         try {
             const data = await axios.delete(`/api/users/${id}`, configValue('authConfigNoContentType'))
+            return {
+                data,
+                complete: true
+            }
         }
         catch (error) {
             const message = error.response && error.response.data.message
@@ -190,6 +192,10 @@ const AuthContext = ({ children }) => {
     const updateUser = async () => {
         try {
             const { data } = await axios.put(`/api/users/${user._id}`, user, configValue('authConfig'))
+            return {
+                data,
+                complete: true
+            }
         }
         catch (error) {
             const message = error.response && error.response.data.message

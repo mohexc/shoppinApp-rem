@@ -1,5 +1,5 @@
-import React from 'react'
-import { Row, Col, Form, Input, Typography, Button, Checkbox, Card, message } from "antd"
+import React, { useEffect } from 'react'
+import { Row, Col, Form, Input, Typography, Button, Checkbox, message } from "antd"
 import { LoginOutlined } from '@ant-design/icons';
 import { useThemColorContex } from '../../context/ThemColorContex';
 import { useHistory } from "react-router-dom"
@@ -24,7 +24,11 @@ const tailLayout = {
 const SignIn = () => {
     const { primary } = useThemColorContex()
     const history = useHistory()
-    const { login, } = useAuthContext()
+    const { login, user } = useAuthContext()
+
+    useEffect(() => {
+        if (user) return history.push('/')
+    }, [user])
 
     const onFinish = async (values) => {
         const result = await login(values)

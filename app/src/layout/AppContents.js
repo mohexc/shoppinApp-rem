@@ -1,5 +1,5 @@
 import React from 'react'
-import { Layout, Card } from 'antd';
+import { Layout } from 'antd';
 
 // main
 const AppContents = ({ children }) => {
