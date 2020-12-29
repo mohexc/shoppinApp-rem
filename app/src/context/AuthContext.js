@@ -9,7 +9,7 @@ const AuthContext = ({ children }) => {
     useEffect(() => {
         const getUser = localStorage.getItem('user')
         if (getUser) {
-            setUser(JSON.parse(getUser))
+            return setUser(JSON.parse(getUser))
         }
     }, [])
 
@@ -67,7 +67,8 @@ const AuthContext = ({ children }) => {
     }
     const logout = async () => {
         localStorage.removeItem('user')
-        localStorage.removeItem('cartItems')
+        localStorage.removeItem('token')
+        localStorage.removeItem('cart')
         localStorage.removeItem('shippingAddress')
         localStorage.removeItem('paymentMethod')
         setUser()

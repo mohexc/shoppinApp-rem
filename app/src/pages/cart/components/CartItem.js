@@ -5,7 +5,7 @@ import { PlusCircleOutlined, MinusCircleOutlined, DeleteOutlined } from '@ant-de
 import { useCartContext } from '../../../context/CartContex';
 
 
-const ItemCard = ({ item, deleteItem }) => {
+const CartItem = ({ item, deleteItem }) => {
     const { addItem, reduceItem, } = useCartContext()
     const itemTotal = _.get(item, "itemTotal")
     const product = _.get(item, "product")
@@ -47,4 +47,4 @@ const ItemCard = ({ item, deleteItem }) => {
     )
 }
 
-export default ItemCard
+export default CartItem

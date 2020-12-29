@@ -4,17 +4,32 @@ import { useAuthContext } from "./AuthContext";
 const Context = React.createContext();
 // main component
 const CartContext = ({ children }) => {
-    const { user } = useAuthContext()
+    const { user, logout } = useAuthContext()
     const [cart, setCart] = useState([])
     const [itemsTotal, setItemsTotal] = useState(0)
 
     useEffect(() => {
+        const getCart = localStorage.getItem('cart')
+        if (getCart) {
+            debugger
+            const _cart = JSON.parse(getCart)
+            setCart([..._cart])
+            return
+        }
+    }, [])
+
+    useEffect(() => {
         const total = cart.reduce((total, item) => total + item.itemTotal, 0)
         setItemsTotal(total)
+        // localStorage.setItem('cart', JSON.stringify(cart))
     }, [cart])
 
     useEffect(() => {
-        setCart([])
+        const getUser = localStorage.getItem('user')
+        if (!getUser) {
+            setCart([])
+        }
+        // localStorage.removeItem('cart')
     }, [user])
 
     const addItem = (product) => {
@@ -25,6 +40,7 @@ const CartContext = ({ children }) => {
             const [..._cart] = cart
             _cart[index] = sameItem
             setCart(_cart)
+            localStorage.setItem('cart', JSON.stringify(cart))
             return
         }
         const newItem = {
@@ -33,13 +49,16 @@ const CartContext = ({ children }) => {
         }
         const updateCart = [...cart, newItem]
         setCart([...updateCart])
+        localStorage.setItem('cart', JSON.stringify(cart))
     }
 
     const reduceItem = (product) => {
         const sameItem = cart.find(item => item.product._id === product._id)
         if (sameItem && sameItem.itemTotal === 1) {
             const filterItem = cart.filter(item => item.product._id !== product._id)
-            return setCart([...filterItem])
+            setCart([...filterItem])
+            localStorage.setItem('cart', JSON.stringify(cart))
+            return
         }
 
         const index = cart.indexOf(element => sameItem._id === element.prodcut._id)
@@ -47,12 +66,19 @@ const CartContext = ({ children }) => {
         const [..._cart] = cart
         _cart[index] = sameItem
         setCart(_cart)
+        localStorage.setItem('cart', JSON.stringify(cart))
         return
     }
 
     const deleteItem = (product) => {
         const filterItem = cart.filter(item => item.product._id !== product._id)
-        return setCart([...filterItem])
+        setCart([...filterItem])
+        localStorage.setItem('cart', JSON.stringify(cart))
+        return
+    }
+
+    const clearCart = () => {
+        setCart()
     }
 
     return (
@@ -62,6 +88,7 @@ const CartContext = ({ children }) => {
             addItem,
             reduceItem,
             deleteItem,
+            clearCart
         }}>
             {children}
         </Context.Provider>

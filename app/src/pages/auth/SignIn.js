@@ -5,6 +5,7 @@ import { useThemColorContex } from '../../context/ThemColorContex';
 import { useHistory } from "react-router-dom"
 import image from "../../images/playstation.jpg"
 import { useAuthContext } from '../../context/AuthContext';
+
 const layout = {
     labelCol: {
         span: 4,
@@ -40,7 +41,7 @@ const SignIn = () => {
         message.error(result.message)
     }
     const onFinishFailed = (values) => {
-
+        message.error(values)
     }
     return (
         <Row style={{ height: "79vh", backgroundColor: "white" }}>

@@ -23,7 +23,7 @@ const AppHeader = () => {
 				</Row>
 				<Divider />
 
-				<Row align="middle" style={{ color: primary, cursor: "pointer" }} onClick={() => history.push(`/cart`)}>
+				<Row align="middle" style={{ color: primary, cursor: "pointer" }} onClick={() => history.push(`/checkout`)}>
 					<ShoppingOutlined style={{ fontSize: "1.2rem", marginRight: "1rem", }} />
 					My Order
 				</Row>
