@@ -28,6 +28,7 @@ const SignUp = () => {
 
     useEffect(() => {
         if (user) return history.push('/')
+        // eslint-disable-next-line
     }, [user])
     const onFinish = async (values) => {
         setSubmitBtn(true)

@@ -3,7 +3,7 @@ import { Modal, Row, Button } from 'antd'
 import { useCartContext } from '../../context/CartContex';
 
 const Delete = (props, ref) => {
-    const { deleteItem } = useCartContext()
+    const { deleteCartItem } = useCartContext()
     const [visible, setvisible] = useState(false)
     const [item, setItem] = useState()
 
@@ -17,8 +17,8 @@ const Delete = (props, ref) => {
         }
     }, [])
 
-    const _deleteItem = () => {
-        deleteItem(item)
+    const _deleteCartItem = () => {
+        deleteCartItem(item)
         setvisible(false)
     }
     if (!item) {
@@ -34,7 +34,7 @@ const Delete = (props, ref) => {
         >
             <h2>Are you sure delete this item</h2>
             <Row justify="end">
-                <Button danger onClick={_deleteItem}>DELETE</Button>
+                <Button danger onClick={_deleteCartItem}>DELETE</Button>
                 <Button style={{ marginLeft: "1rem" }} onClick={() => setvisible(false)}>CANCEL</Button>
             </Row>
         </Modal>

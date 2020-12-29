@@ -11,16 +11,16 @@ const OrderItem = ({ orderItem }) => {
             <Col xs={3} className="flex-center">
                 <img src={product.image} alt="" style={{ height: '50px', objectFit: "contain" }} />
             </Col>
-            <Col xs={9} className="flex-center">
+            <Col xs={8} className="flex-center">
                 {product.name}
             </Col>
-            <Col xs={4} className="flex-center">
+            <Col xs={3} className="flex-center">
                 <span>{product.price}</span>
             </Col>
             <Col xs={4} className="flex-center">
                 <span>{itemTotal}</span>
             </Col>
-            <Col xs={4} className="flex-center">
+            <Col xs={6} className="flex-center">
                 {itemTotal * product.price}
             </Col>
         </Row>

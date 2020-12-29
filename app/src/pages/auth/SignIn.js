@@ -29,7 +29,7 @@ const SignIn = () => {
 
     useEffect(() => {
         if (user) return history.push('/')
-    }, [user])
+    }, [user, history])
 
     const onFinish = async (values) => {
         const result = await login(values)

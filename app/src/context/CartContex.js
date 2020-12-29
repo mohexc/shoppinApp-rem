@@ -4,10 +4,11 @@ import { useAuthContext } from "./AuthContext";
 const Context = React.createContext();
 // main component
 const CartContext = ({ children }) => {
-    const { user, logout } = useAuthContext()
+    const { user } = useAuthContext()
     const [cart, setCart] = useState([])
-    const [itemsTotal, setItemsTotal] = useState(0)
-
+    const [cartItemTotal, setcartItemTotal] = useState(0)
+    const [shippingAddress, setshippingAddress] = useState(JSON.parse(localStorage.getItem('shippingAddress')))
+    const [paymentMethod, setpaymentMethod] = useState(JSON.parse(localStorage.getItem('paymentMethod')))
     useEffect(() => {
         const getCart = localStorage.getItem('cart')
         if (getCart) {
@@ -20,7 +21,7 @@ const CartContext = ({ children }) => {
 
     useEffect(() => {
         const total = cart.reduce((total, item) => total + item.itemTotal, 0)
-        setItemsTotal(total)
+        setcartItemTotal(total)
         // localStorage.setItem('cart', JSON.stringify(cart))
     }, [cart])
 
@@ -29,16 +30,16 @@ const CartContext = ({ children }) => {
         if (!getUser) {
             setCart([])
         }
-        // localStorage.removeItem('cart')
+        // localStorage.removeCartItem('cart')
     }, [user])
 
-    const addItem = (product) => {
-        const sameItem = cart.find(item => item.product._id === product._id)
-        if (sameItem) {
-            const index = cart.indexOf(element => sameItem._id === element.prodcut._id)
-            sameItem.itemTotal = sameItem.itemTotal + 1
+    const addCartItem = (product) => {
+        const sameCartItem = cart.find(item => item.product._id === product._id)
+        if (sameCartItem) {
+            const index = cart.indexOf(element => sameCartItem._id === element.prodcut._id)
+            sameCartItem.itemTotal = sameCartItem.itemTotal + 1
             const [..._cart] = cart
-            _cart[index] = sameItem
+            _cart[index] = sameCartItem
             setCart(_cart)
             localStorage.setItem('cart', JSON.stringify(cart))
             return
@@ -52,25 +53,25 @@ const CartContext = ({ children }) => {
         localStorage.setItem('cart', JSON.stringify(cart))
     }
 
-    const reduceItem = (product) => {
-        const sameItem = cart.find(item => item.product._id === product._id)
-        if (sameItem && sameItem.itemTotal === 1) {
+    const removeCartItem = (product) => {
+        const sameCartItem = cart.find(item => item.product._id === product._id)
+        if (sameCartItem && sameCartItem.itemTotal === 1) {
             const filterItem = cart.filter(item => item.product._id !== product._id)
             setCart([...filterItem])
             localStorage.setItem('cart', JSON.stringify(cart))
             return
         }
 
-        const index = cart.indexOf(element => sameItem._id === element.prodcut._id)
-        sameItem.itemTotal = sameItem.itemTotal - 1
+        const index = cart.indexOf(element => sameCartItem._id === element.prodcut._id)
+        sameCartItem.itemTotal = sameCartItem.itemTotal - 1
         const [..._cart] = cart
-        _cart[index] = sameItem
+        _cart[index] = sameCartItem
         setCart(_cart)
         localStorage.setItem('cart', JSON.stringify(cart))
         return
     }
 
-    const deleteItem = (product) => {
+    const deleteCartItem = (product) => {
         const filterItem = cart.filter(item => item.product._id !== product._id)
         setCart([...filterItem])
         localStorage.setItem('cart', JSON.stringify(cart))
@@ -79,16 +80,31 @@ const CartContext = ({ children }) => {
 
     const clearCart = () => {
         setCart()
+        localStorage.removeCartItem('cart')
+    }
+
+    const savePaymentMethod = (values) => {
+        setpaymentMethod(values)
+        localStorage.setItem('paymentMethod', JSON.stringify(values))
+    }
+
+    const saveShippingAddress = (values) => {
+        setshippingAddress(values)
+        localStorage.setItem('shippingAddress', JSON.stringify(values))
     }
 
     return (
         <Context.Provider value={{
             cart,
-            itemsTotal,
-            addItem,
-            reduceItem,
-            deleteItem,
-            clearCart
+            cartItemTotal,
+            addCartItem,
+            removeCartItem,
+            deleteCartItem,
+            clearCart,
+            savePaymentMethod,
+            saveShippingAddress,
+            paymentMethod,
+            shippingAddress
         }}>
             {children}
         </Context.Provider>

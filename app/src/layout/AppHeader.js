@@ -10,7 +10,7 @@ import _ from 'lodash'
 // main
 const AppHeader = () => {
 	const { primary } = useThemColorContex()
-	const { itemsTotal } = useCartContext()
+	const { cartItemTotal } = useCartContext()
 	const history = useHistory()
 	const { user, logout } = useAuthContext()
 
@@ -37,7 +37,7 @@ const AppHeader = () => {
 	}
 
 	const goTo = () => {
-		if (itemsTotal) return history.push('/cart')
+		if (cartItemTotal) return history.push('/cart')
 		return history.push('/')
 	}
 
@@ -54,7 +54,7 @@ const AppHeader = () => {
 							<Row justify={_.get(user, 'isAdmin', false) ? 'center' : 'end'} align="middle" style={{ width: '100%' }}>
 								<Button onClick={() => goTo()} style={{ marginRight: "1rem" }}>
 									<ShoppingCartOutlined style={{ fontSize: '1.2rem', color: primary, marginRight: "0.5rem" }} />
-									<span style={{ marginRight: "0.5rem", marginLeft: "0.5rem" }}>{itemsTotal}</span>
+									<span style={{ marginRight: "0.5rem", marginLeft: "0.5rem" }}>{cartItemTotal}</span>
 									<span >CART</span>
 								</Button>
 

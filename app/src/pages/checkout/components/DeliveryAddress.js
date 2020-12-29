@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { Row, Card, Typography, Form, Input, Button, message } from 'antd'
+import { Card, Typography, Form, Input, Button, message } from 'antd'
+import { useCartContext } from '../../../context/CartContex';
 
 const layout = {
     labelCol: {
@@ -17,10 +18,9 @@ const tailLayout = {
 };
 
 const DeliveryAddress = () => {
-    const [shippingAddress, setShippingAddress] = useState(JSON.parse(localStorage.getItem('shippingAddress')))
-    const onFinish = async (values) => {
-        setShippingAddress(values)
-        localStorage.setItem('shippingAddress', JSON.stringify(values))
+    const { saveShippingAddress, shippingAddress } = useCartContext()
+    const onFinish = (values) => {
+        saveShippingAddress(values)
         message.success('Edit Success')
     }
     const onFinishFailed = (values) => {
@@ -69,7 +69,7 @@ const DeliveryAddress = () => {
                     <Input />
                 </Form.Item>
                 <Form.Item {...tailLayout}>
-                    <Button type="primary" block htmlType="button" >EDIT</Button>
+                    <Button type="primary" block htmlType="submit" >EDIT</Button>
                 </Form.Item>
             </Form>
         </Card>

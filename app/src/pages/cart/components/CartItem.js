@@ -5,8 +5,8 @@ import { PlusCircleOutlined, MinusCircleOutlined, DeleteOutlined } from '@ant-de
 import { useCartContext } from '../../../context/CartContex';
 
 
-const CartItem = ({ item, deleteItem }) => {
-    const { addItem, reduceItem, } = useCartContext()
+const CartItem = ({ item, deleteCartItem }) => {
+    const { addCartItem, removeCartItem, } = useCartContext()
     const itemTotal = _.get(item, "itemTotal")
     const product = _.get(item, "product")
     const financial = (x) => Number.parseFloat(x).toFixed(2);
@@ -23,10 +23,10 @@ const CartItem = ({ item, deleteItem }) => {
                     Price: {product.price}
                 </Col>
                 <Col xs={4}>
-                    <MinusCircleOutlined onClick={() => reduceItem(product)} style={{ fontSize: "1.2rem", marginRight: "1.5rem", }} />
+                    <MinusCircleOutlined onClick={() => removeCartItem(product)} style={{ fontSize: "1.2rem", marginRight: "1.5rem", }} />
                     <span>Total: </span>
                     <span>{itemTotal}</span>
-                    <PlusCircleOutlined onClick={() => addItem(product)} style={{ fontSize: "1.2rem", marginLeft: "1.5rem", }} />
+                    <PlusCircleOutlined onClick={() => addCartItem(product)} style={{ fontSize: "1.2rem", marginLeft: "1.5rem", }} />
                 </Col>
                 <Col xs={4}>
                     <Row >
@@ -37,7 +37,7 @@ const CartItem = ({ item, deleteItem }) => {
                 <Col xs={4}>
                     <span >
                         <DeleteOutlined
-                            onClick={() => deleteItem(product)}
+                            onClick={() => deleteCartItem(product)}
                             style={{ color: "red", fontSize: "1.2rem", marginLeft: "1.5rem", cursor: 'pointer' }}
                         />
                     </span>

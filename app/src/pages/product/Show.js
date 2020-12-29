@@ -9,7 +9,7 @@ const Show = () => {
     const history = useHistory();
     const params = useParams();
     const [product, setProduct] = useState()
-    const { addItem } = useCartContext()
+    const { addCartItem } = useCartContext()
 
     useEffect(() => {
         fetchProdcut()
@@ -52,7 +52,7 @@ const Show = () => {
                         </Row>
                         <Divider />
                         <Row style={{ paddingLeft: '1rem', paddingRight: "1rem", paddingBottom: "1rem" }}>
-                            <Button disabled={product.countInStock < 1 ? true : false} block type='primary' onClick={() => addItem(product)}>
+                            <Button disabled={product.countInStock < 1 ? true : false} block type='primary' onClick={() => addCartItem(product)}>
                                 ADD TO CART
                             </Button>
                         </Row >

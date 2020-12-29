@@ -1,4 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
+import configValue from '../utils/configValue'
 import axios from 'axios'
 
 const Context = React.createContext();
@@ -13,42 +14,11 @@ const AuthContext = ({ children }) => {
         }
     }, [])
 
-    const configValue = (type) => {
-        let config
-        switch (type) {
-            case 'config':
-                config = {
-                    headers: { 'Content-Type': 'application/json' },
-                }
-                break;
-            case 'authConfig':
-                config = {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        Authorization: `Bearer ${user.token}`,
-                    },
-                }
-                break;
-            case 'authConfigNoContentType':
-                config = {
-                    headers: {
-                        Authorization: `Bearer ${user.token}`,
-                    },
-                }
-                break;
-
-            default:
-                break;
-        }
-        return config
-    }
-
 
     const login = async (values) => {
         try {
-            const { data } = await axios.post('/api/users/login', values, configValue('config'))
+            const { data } = await axios.post('/api/users/login', values, configValue('config',user))
             localStorage.setItem('user', JSON.stringify(data))
-            debugger
             setUser(data)
             return {
                 complete: true,
@@ -79,7 +49,7 @@ const AuthContext = ({ children }) => {
     }
     const register = async (values) => {
         try {
-            const { data } = await axios.post('/api/users/register', values, configValue('config'))
+            const { data } = await axios.post('/api/users/register', values, configValue('config',user))
             localStorage.setItem('user', JSON.stringify(data))
             setUser(data)
             return {
@@ -100,7 +70,7 @@ const AuthContext = ({ children }) => {
 
     const getUserDetails = async (id) => {
         try {
-            const { data } = await axios.get(`/api/users/${id}`, configValue('authConfigNoContentType'))
+            const { data } = await axios.get(`/api/users/${id}`, configValue('authConfigNoContentType',user))
             return {
                 complete: true,
                 message: 'Get User Details Sucsses',
@@ -123,7 +93,7 @@ const AuthContext = ({ children }) => {
 
     const updateUserProfile = async (values) => {
         try {
-            const { data } = await axios.put(`/api/users/profile`, values, configValue('authConfig'))
+            const { data } = await axios.put(`/api/users/profile`, values, configValue('authConfig',user))
             setUser(data)
             localStorage.setItem('user', JSON.stringify(data))
             return {
@@ -148,7 +118,7 @@ const AuthContext = ({ children }) => {
 
     const listUsers = async () => {
         try {
-            const { data } = await axios.get(`/api/users`, configValue('authConfigNoContentType'))
+            const { data } = await axios.get(`/api/users`, configValue('authConfigNoContentType',user))
             return {
                 data,
                 complete: true
@@ -170,7 +140,7 @@ const AuthContext = ({ children }) => {
 
     const deleteUser = async (id) => {
         try {
-            const data = await axios.delete(`/api/users/${id}`, configValue('authConfigNoContentType'))
+            const data = await axios.delete(`/api/users/${id}`, configValue('authConfigNoContentType',user))
             return {
                 data,
                 complete: true
@@ -192,7 +162,7 @@ const AuthContext = ({ children }) => {
 
     const updateUser = async () => {
         try {
-            const { data } = await axios.put(`/api/users/${user._id}`, user, configValue('authConfig'))
+            const { data } = await axios.put(`/api/users/${user._id}`, user, configValue('authConfig',user))
             return {
                 data,
                 complete: true

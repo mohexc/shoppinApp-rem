@@ -8,23 +8,23 @@ import Delete from './Delete'
 
 const List = () => {
     const history = useHistory()
-    const { cart, itemsTotal } = useCartContext()
+    const { cart, cartItemTotal } = useCartContext()
     const deletItemModalRef = useRef()
 
     useEffect(() => {
-        if (!itemsTotal) return history.push('/')
+        if (!cartItemTotal) return history.push('/')
         // eslint-disable-next-line
-    }, [itemsTotal])
+    }, [cartItemTotal])
 
-    const deleteItem = (product) => {
+    const deleteCartItem = (product) => {
         deletItemModalRef.current.showModal(product)
     }
 
     return (
         <div className="order-list">
             <Typography.Title level={3}>Cart</Typography.Title>
-            {cart.map((item) => <CartItem key={item.product._id} item={item} deleteItem={deleteItem} />)}
-            {(itemsTotal > 0) && <SummaryCart />}
+            {cart.map((item) => <CartItem key={item.product._id} item={item} deleteCartItem={deleteCartItem} />)}
+            {(cartItemTotal > 0) && <SummaryCart />}
             <Delete ref={deletItemModalRef} />
         </div>
     )

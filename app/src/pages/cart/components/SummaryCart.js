@@ -4,7 +4,7 @@ import { useCartContext } from '../../../context/CartContex'
 import { useHistory } from "react-router-dom"
 const SummaryCart = () => {
     const history = useHistory()
-    const { cart, itemsTotal, } = useCartContext()
+    const { cart, cartItemTotal, } = useCartContext()
     const financial = (x) => Number.parseFloat(x).toFixed(2);
     const totalPrice = cart.reduce((total, element) => total + (element.product.price * element.itemTotal), 0)
     return (
@@ -18,7 +18,7 @@ const SummaryCart = () => {
         }}>
             <Row gutter={[16, 16]}>
                 <Col xs={10}>
-                    Total Item : {itemsTotal}
+                    Total Item : {cartItemTotal}
                 </Col>
                 <Col xs={10}>
                     Total Price : {financial(totalPrice)}
