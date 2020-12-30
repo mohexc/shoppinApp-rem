@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { useAuthContext } from "./AuthContext";
 import { useCartContext } from "./CartContex";
 import configValue from '../utils/configValue'
+import axios from "axios";
 
 const Context = React.createContext();
 // main component
@@ -10,7 +11,7 @@ const OrderContext = ({ children }) => {
     const { cart } = useCartContext()
     const [order, setOrder] = useState()
 
-    const createOrder = (values) => {
+    const createOrder = async (values) => {
         try {
             const { data } = await axios.post(`/api/orders`, values, configValue('authConfig'))
 

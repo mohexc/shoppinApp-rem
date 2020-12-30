@@ -5,10 +5,35 @@ const Context = React.createContext();
 // main component
 const ProductContext = ({ children }) => {
 
+    const [prodcuts, setProdcuts] = useState()
+
+
+    const getProdcuts = () => {
+
+    }
+    const getProdcutId = () => {
+
+    }
+    const updateProdcutId = () => {
+
+    }
+
+    const createProdcut = () => {
+
+    }
+
+    const deleteProdcutId = () => {
+
+    }
 
     return (
         <Context.Provider value={{
-
+            prodcuts,
+            getProdcuts,
+            getProdcutId,
+            updateProdcutId,
+            createProdcut,
+            deleteProdcutId
         }}>
             {children}
         </Context.Provider>

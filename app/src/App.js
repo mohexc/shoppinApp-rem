@@ -3,6 +3,7 @@ import './App.less';
 import AuthContext from './context/AuthContext';
 import CartContext from './context/CartContex';
 import ThemColorContex from './context/ThemColorContex';
+import OrderContext from './context/OrderContext';
 import AppLayout from './layout/AppLayout';
 
 const App = () => {
@@ -10,7 +11,9 @@ const App = () => {
     <AuthContext>
       <ThemColorContex>
         <CartContext>
-          <AppLayout />
+          <OrderContext>
+            <AppLayout />
+          </OrderContext>
         </CartContext>
       </ThemColorContex>
     </AuthContext>

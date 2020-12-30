@@ -7,6 +7,9 @@ import { useHistory } from "react-router-dom"
 import { useCartContext } from '../context/CartContex';
 import { useAuthContext } from '../context/AuthContext';
 import _ from 'lodash'
+import SignInButton from './components/SignInButton';
+import SignUpButton from './components/SignUpButton';
+import UserButton from './components/UserButton';
 // main
 const AppHeader = () => {
 	const { primary } = useThemColorContex()
@@ -14,27 +17,7 @@ const AppHeader = () => {
 	const history = useHistory()
 	const { user, logout } = useAuthContext()
 
-	const popoverAccount = () => {
-		return (
-			<div style={{ width: "250px" }}>
-				<Row align="middle" style={{ color: primary }} onClick={() => history.push(`/profile`)}>
-					<SettingOutlined style={{ fontSize: "1.2rem", marginRight: "1rem", }} />
-					Account
-				</Row>
-				<Divider />
 
-				<Row align="middle" style={{ color: primary, cursor: "pointer" }} onClick={() => history.push(`/checkout`)}>
-					<ShoppingOutlined style={{ fontSize: "1.2rem", marginRight: "1rem", }} />
-					My Order
-				</Row>
-				<Divider />
-				<Row align="middle" style={{ color: primary }} onClick={logout}>
-					<LogoutOutlined style={{ fontSize: "1.2rem", marginRight: "1rem", }} />
-					Logout
-				</Row>
-			</div>
-		)
-	}
 
 	const goTo = () => {
 		if (cartItemTotal) return history.push('/cart')
@@ -59,20 +42,10 @@ const AppHeader = () => {
 								</Button>
 
 								{(user && user.name)
-									? <div>
-										<Popover placement="bottom" content={popoverAccount()} trigger="click" >
-											<Button>Account: {user.name}</Button>
-										</Popover>
-									</div>
+									? <UserButton />
 									: <div>
-										<Button onClick={() => history.push('/signin')} style={{ marginRight: "1rem" }}>
-											<LoginOutlined style={{ fontSize: '1.2rem', color: primary, marginRight: "0.5rem" }} />
-											<span >SIGN IN</span>
-										</Button>
-										<Button onClick={() => history.push('/signup')} style={{ marginRight: "1rem" }}>
-											<SolutionOutlined style={{ fontSize: '1.2rem', color: primary, marginRight: "0.5rem" }} />
-											<span >SIGN UP</span>
-										</Button>
+										<SignInButton />
+										<SignUpButton />
 									</div>
 								}
 
